@@ -20,14 +20,18 @@ public class Aula02 {
 //        for (int z = 0; z<6; z++){
 //        System.out.println(a[z]);
 //        }
-            Pilha p = new Pilha();
-            p.empilhar(1);
-            p.empilhar(2);
-            p.empilhar(3);
-            p.empilhar(445);
-            p.empilhar(2);
-            p.empilhar(1);
-            p.imprimepilha();
+//            Pilha p = new Pilha();
+//            p.empilhar(1);
+//            p.empilhar(2);
+//            p.empilhar(3);
+//            p.empilhar(445);
+//            p.empilhar(2);
+//            p.empilhar(1);
+//            p.imprimepilha();
+            PilhaEncadeada pilha1 = new PilhaEncadeada();
+            pilha1.empilhar(2);
+            pilha1.empilhar(5);
+            pilha1.imprime();
         }
 
 

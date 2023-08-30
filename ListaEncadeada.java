@@ -12,6 +12,7 @@ public class ListaEncadeada {
             no.setInformacao(informacao);
             if(Lista == null){
                 Lista=no;
+                //define o primeiro da lista sendo o no passado
             }
             else{
                 //Aqui se cria um apontador para a lista.
@@ -24,7 +25,8 @@ public class ListaEncadeada {
         }
 
         public void remover(){
-            Lista = Lista.getProximo();//define o primeiro (Lista) sendo o segundo(Lista.getProximo())
+            Lista = Lista.getProximo();
+            //define o primeiro (Lista) sendo o segundo(Lista.getProximo())
 
         }
 

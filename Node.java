@@ -3,17 +3,17 @@
         private Integer informacao;
         private Node proximo;
 
-        public Node()
+        public Node(int informacao)
         {
-            this.informacao = null;
+            this.informacao = informacao;
             this.proximo = null;
         }
 
-        public Integer getInformacao() {
+        public Integer getDado() {
             return informacao;
         }
 
-        public void setInformacao(Integer informacao) {
+        public void setDado(Integer informacao) {
             this.informacao = informacao;
         }
 

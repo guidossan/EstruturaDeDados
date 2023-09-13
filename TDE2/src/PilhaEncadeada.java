@@ -25,7 +25,6 @@ public class PilhaEncadeada {
         }
 
         public void desempilhar(){
-            System.out.println("Dado removido: " + topo.getDado());
             topo = topo.getProximo();
             imprime();
         }
@@ -33,18 +32,14 @@ public class PilhaEncadeada {
         //Imprimindo elementos
         public void imprime(){
 
-            System.out.println("\nFila encadeada:");
 
             Node atual = topo;
 
             while (atual != null) {
-
-                System.out.print(atual.getDado()+ "\n");
+                System.out.print("|"+atual.getDado()+ "|"+"\n");
                 atual= atual.getProximo();
 
             }
-
-            System.out.print("Fim da pilha");
 
         }
 

@@ -8,12 +8,12 @@ public class Jogo {
 
         System.out.print("Digite o tamanho das pilhas: ");
         int tamanho = scanner.nextInt();
-        boolean ordemCrescente = true;
+        boolean verificaCres = true;
 
         System.out.print("Deseja ordem crescente? (S/N): ");
         String resposta = scanner.next();
         if (resposta.equalsIgnoreCase("N")) {
-            ordemCrescente = false;
+            verificaCres = false;
         }
 
         PilhaEncadeada pilha1 = new PilhaEncadeada();
@@ -22,12 +22,8 @@ public class Jogo {
 
         for (int i = 0; i < tamanho; i++) {
             int numeroAleatorio = random.nextInt(100) + 1;
-            pilha1.empilhar(numeroAleatorio);
+            pilha2.empilhar(numeroAleatorio);
         }
-
-//        if (!ordemCrescente) {
-//            Collections.sort(pilha1, Collections.reverseOrder());
-//        }
 
         int jogadas = 0;
 
@@ -54,20 +50,42 @@ public class Jogo {
                     jogadas++;
                 }
 
-                if (verificarOrdenacao(pilha1) || verificarOrdenacao(pilha2) || verificarOrdenacao(pilha3)) {
+                if (verificarOrdenacao(pilha1) ^ verificarOrdenacao(pilha2) ^ verificarOrdenacao(pilha3)) {
                     System.out.println("Ordenação concluída em " + jogadas + " jogadas");
                     break;
                 }
-            } else if (opcao == 2) {
-                // Implemente a lógica da solução automática aqui, se desejar.
+//            } else if (opcao == 2) {
+//
+//            }
             }
         }
+
+    }
+    public static boolean verificarOrdenacao(PilhaEncadeada pilha ){
+        if (verificaCres(pilha)||verificaDecre(pilha)){
+            return true;
+        }
+        return false;
+    }
+    public static boolean verificaCres(PilhaEncadeada pilha){
+        Node atual = pilha.getTopo();
+        if(atual.getDado()>atual.getProximo().getDado()){
+            return false;
+        }
+        return true;
+    }
+    public static boolean verificaDecre(PilhaEncadeada pilha){
+        Node atual = pilha.getTopo();
+        if(atual.getDado()<atual.getProximo().getDado()){
+            return false;
+        }
+        return true;
     }
 
     public static void imprimirPilhas(PilhaEncadeada pilha1, PilhaEncadeada pilha2, PilhaEncadeada pilha3) {
-        System.out.println("Pilha 1: " + pilha1);
-        System.out.println("Pilha 2: " + pilha2);
-        System.out.println("Pilha 3: " + pilha3);
+        pilha1.imprime();
+        pilha2.imprime();
+        pilha3.imprime();
     }
 
     public static boolean movimentaPilha(int origem, int destino, PilhaEncadeada pilha1, PilhaEncadeada pilha2, PilhaEncadeada pilha3) {

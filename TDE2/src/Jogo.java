@@ -49,8 +49,10 @@ public class Jogo {
                 if (movimentaPilha(origem, destino, pilha1, pilha2, pilha3)) {
                     jogadas++;
                 }
-
-                if (verificarOrdenacao(pilha1) ^ verificarOrdenacao(pilha2) ^ verificarOrdenacao(pilha3)) {
+                boolean A = verificarOrdenacao(pilha1);
+                boolean B = verificarOrdenacao(pilha1);
+                boolean C = verificarOrdenacao(pilha1);
+                if ( ( A ^ B ^ C ) && ( ( A || B || C ) && ( !  ( A && B && C ) ) )) {
                     System.out.println("Ordenação concluída em " + jogadas + " jogadas");
                     break;
                 }
@@ -69,23 +71,38 @@ public class Jogo {
     }
     public static boolean verificaCres(PilhaEncadeada pilha){
         Node atual = pilha.getTopo();
-        if(atual.getDado()>atual.getProximo().getDado()){
+        if(atual==null){
             return false;
         }
-        return true;
+        while (atual != null){
+            if(atual.getProximo() == null){
+                return true;
+            }
+            if(atual.getProximo().getDado() > atual.getDado()){
+                return false;
+            }
+            return true;
+        }
+        return false;
     }
     public static boolean verificaDecre(PilhaEncadeada pilha){
         Node atual = pilha.getTopo();
-        if(atual.getDado()<atual.getProximo().getDado()){
-            return false;
+        while (atual != null){
+            if(atual==null){
+                return false;
+            }
+            if(atual.getProximo().getDado() < atual.getDado()){
+                return false;
+            }
+            return true;
         }
-        return true;
+        return false;
     }
 
     public static void imprimirPilhas(PilhaEncadeada pilha1, PilhaEncadeada pilha2, PilhaEncadeada pilha3) {
-        pilha1.imprime();
-        pilha2.imprime();
-        pilha3.imprime();
+        System.out.println("Pilha 1");pilha1.imprime();
+        System.out.println("Pilha 2");pilha2.imprime();
+        System.out.println("Pilha 3");pilha3.imprime();
     }
 
     public static boolean movimentaPilha(int origem, int destino, PilhaEncadeada pilha1, PilhaEncadeada pilha2, PilhaEncadeada pilha3) {

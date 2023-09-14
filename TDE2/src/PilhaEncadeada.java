@@ -31,16 +31,14 @@ public class PilhaEncadeada {
 
         //Imprimindo elementos
         public void imprime(){
-
-
             Node atual = topo;
-
-            while (atual != null) {
-                System.out.print("|"+atual.getDado()+ "|"+"\n");
-                atual= atual.getProximo();
-
+            if(atual==null){
+                System.out.print("|" + "-" + "|" + "\n");
             }
-
+            while(atual!=null) {
+                System.out.print("|" + atual.getDado() + "|" + "\n");
+                atual = atual.getProximo();
+            }
         }
 
         public Node getPrimeiro(){

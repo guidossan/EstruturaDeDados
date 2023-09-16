@@ -50,8 +50,8 @@ public class Jogo {
                     jogadas++;
                 }
                 boolean A = verificarOrdenacao(pilha1);
-                boolean B = verificarOrdenacao(pilha1);
-                boolean C = verificarOrdenacao(pilha1);
+                boolean B = verificarOrdenacao(pilha2);
+                boolean C = verificarOrdenacao(pilha3);
                 if ( ( A ^ B ^ C ) && ( ( A || B || C ) && ( !  ( A && B && C ) ) )) {
                     System.out.println("Ordenação concluída em " + jogadas + " jogadas");
                     break;

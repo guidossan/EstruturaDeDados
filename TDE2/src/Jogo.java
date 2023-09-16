@@ -71,13 +71,13 @@ public class Jogo {
             return false;
         }
         while (atual.getProximo() != null) {
-            if (atual.getProximo().getDado() > atual.getDado()) {
+            if (atual.getProximo().getDado() < atual.getDado()) {
                 atual = atual.getProximo();
             } else {
                 return false;
             }
         }
-        return true;
+        return false;
     }
 
     public static boolean verificaDecre(PilhaEncadeada pilha){
@@ -86,7 +86,7 @@ public class Jogo {
             return false;
         }
         while (atual.getProximo() != null) {
-            if (atual.getProximo().getDado() < atual.getDado()) {
+            if (atual.getProximo().getDado() > atual.getDado()) {
                 atual = atual.getProximo();
             } else {
                 return false;
@@ -137,6 +137,10 @@ public class Jogo {
     }
 
     public static int automatica(PilhaEncadeada pilha1, PilhaEncadeada pilha2, PilhaEncadeada pilha3) {
+        if(pilha1.estavazia()){
+            movimentaPilha(2,1,pilha1,  pilha2,  pilha3);
+            movimentaPilha(2,3,pilha1,  pilha2,  pilha3);
+        }
         if( pilha2.estavazia() && pilha3.estavazia()){
             Integer B = pilha2.getTopo().getDado();
             Integer C = pilha3.getTopo().getDado();
@@ -173,38 +177,16 @@ public class Jogo {
                         movimentaPilha(2, 3, pilha1, pilha2, pilha3);
                     }
                 }
-                jogadas++;
-            }
-            if(pilha1.estavazia()){
-                Integer B = pilha2.getTopo().getDado();
-                Integer C = pilha3.getTopo().getDado();
-                if(B<C){
-                    movimentaPilha(3,1,pilha1,  pilha2,  pilha3);
-                } else {
-                    movimentaPilha(2,1,pilha1,  pilha2,  pilha3);
+                if ((pilha1.getTopo() == null || A >= B) && (pilha1.getTopo() == null || A <= C)) {
+                    movimentaPilha(1, 3, pilha1, pilha2, pilha3);
+                } else if ((pilha2.getTopo() == null || B >= A) && (pilha2.getTopo() == null || B <= C)) {
+                    movimentaPilha(2, 3, pilha1, pilha2, pilha3);
+                } else if ((pilha3.getTopo() == null || C >= A) && (pilha3.getTopo() == null || C <= B)) {
+                    movimentaPilha(3, 1, pilha1, pilha2, pilha3);
                 }
                 jogadas++;
             }
-            if(pilha2.estavazia()){
-                Integer A = pilha2.getTopo().getDado();
-                Integer C = pilha3.getTopo().getDado();
-                if(A<C){
-                    movimentaPilha(3,1,pilha1,  pilha2,  pilha3);
-                } else {
-                    movimentaPilha(2,1,pilha1,  pilha2,  pilha3);
-                }
-                jogadas++;
-            }
-            if(pilha3.estavazia()){
-                Integer B = pilha2.getTopo().getDado();
-                Integer A = pilha3.getTopo().getDado();
-                if(B<A){
-                    movimentaPilha(3,1,pilha1,  pilha2,  pilha3);
-                } else {
-                    movimentaPilha(2,1,pilha1,  pilha2,  pilha3);
-                }
-                jogadas++;
-            }
+
         }
         return jogadas;
     }

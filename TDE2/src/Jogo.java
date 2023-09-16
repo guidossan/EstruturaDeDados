@@ -58,8 +58,6 @@ public class Jogo {
                 }
             } else if (opcao == 2) {
                 while(true){
-                    automatica(pilha1,  pilha2, pilha3);
-                    jogadas++;
                     boolean A = verificarOrdenacao(pilha1);
                     boolean B = verificarOrdenacao(pilha2);
                     boolean C = verificarOrdenacao(pilha3);
@@ -67,6 +65,8 @@ public class Jogo {
                         System.out.println("Ordenação concluída em " + jogadas + " jogadas");
                         break;
                     }
+                    automatica(pilha1,  pilha2, pilha3);
+                    jogadas++;
                 }
             }
         }
@@ -152,27 +152,54 @@ public class Jogo {
     public static void automatica(PilhaEncadeada pilha1, PilhaEncadeada pilha2, PilhaEncadeada pilha3) {
         movimentaPilha(2,1, pilha1,  pilha2,  pilha3);
         movimentaPilha(2,3, pilha1,  pilha2,  pilha3);
-        int A = pilha1.getTopo().getDado();
-        int B = pilha2.getTopo().getDado();
-        int C = pilha3.getTopo().getDado();
-        if ((A >= B && A <= C) || (A >= C && A <= B)) {         //valor intermadiario eh A
+        Integer A = pilha1.getTopo().getDado();
+        Integer B = pilha2.getTopo().getDado();
+        Integer C = pilha3.getTopo().getDado();
+        if(A == null){
             if(B<C){
+                movimentaPilha(2,3,pilha1,  pilha2,  pilha3);
+
+            } else {
+                movimentaPilha(3,2,pilha1,  pilha2,  pilha3);
+
+            }
+        }
+        if(B == null){
+            if(A<C){
+                movimentaPilha(3,1,pilha1,  pilha2,  pilha3);
+
+            } else {
                 movimentaPilha(1,3,pilha1,  pilha2,  pilha3);
+
+            }
+        }
+        if(C == null){
+            if(B<A){
+                movimentaPilha(2,1,pilha1,  pilha2,  pilha3);
+
             } else {
                 movimentaPilha(1,2,pilha1,  pilha2,  pilha3);
+
             }
-        } else if ((B >= A && B <= C) || (B >= C && B <= A)) {  //valor intermadiario eh B
-            if(A>C){
-                movimentaPilha(2,1,pilha1,  pilha2,  pilha3);
-            } else {
-                movimentaPilha(2, 3, pilha1, pilha2, pilha3);
-            }
-        } else {                                                //valor intermadiario eh C
-           if(A>B){
-               movimentaPilha(3,1,pilha1,  pilha2,  pilha3);
-           } else {
-               movimentaPilha(3,2,pilha1,  pilha2,  pilha3);
-           }
         }
+                    if ((A >= B && A <= C) || (A >= C && A <= B)) {         //valor intermadiario eh A
+                        if(B<C){
+                            movimentaPilha(1,3,pilha1,  pilha2,  pilha3);
+                        } else {
+                            movimentaPilha(1,2,pilha1,  pilha2,  pilha3);
+                        }
+                    } else if ((B >= A && B <= C) || (B >= C && B <= A)) {  //valor intermadiario eh B
+                        if(A>C){
+                            movimentaPilha(2,1,pilha1,  pilha2,  pilha3);
+                        } else {
+                            movimentaPilha(2, 3, pilha1, pilha2, pilha3);
+                        }
+                    } else {                                                //valor intermadiario eh C
+                        if (A > B) {
+                            movimentaPilha(3, 1, pilha1, pilha2, pilha3);
+                        } else {
+                            movimentaPilha(3, 2, pilha1, pilha2, pilha3);
+                        }
+                    }
     }
 }

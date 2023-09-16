@@ -40,7 +40,12 @@ public class PilhaEncadeada {
                 atual = atual.getProximo();
             }
         }
-
+        public boolean estavazia(){
+            if(topo == null){
+                return true;
+            }
+            return false;
+        }
         public Node getPrimeiro(){
             return base;
         }

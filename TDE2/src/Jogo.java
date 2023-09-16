@@ -137,10 +137,10 @@ public class Jogo {
     }
 
     public static int automatica(PilhaEncadeada pilha1, PilhaEncadeada pilha2, PilhaEncadeada pilha3) {
-        Integer A = pilha1.isEmpty() ? null : pilha1.getTopo().getDado();
-
-        Integer B = pilha2.getTopo().getDado();
-        Integer C = pilha3.getTopo().getDado();
+        if( pilha2.estavazia() && pilha3.estavazia()){
+            Integer B = pilha2.getTopo().getDado();
+            Integer C = pilha3.getTopo().getDado();
+        }
         int jogadas = 0;
         while(true){
             boolean a = verificarOrdenacao(pilha1);
@@ -150,55 +150,62 @@ public class Jogo {
                 System.out.println("Ordenação concluída em " + jogadas + " jogadas");
                 break;
             }
-            if(A == null){
-                if(B<C){
-                    movimentaPilha(2,3,pilha1,  pilha2,  pilha3);
-
-                } else {
-                    movimentaPilha(3,2,pilha1,  pilha2,  pilha3);
-
+            if(!pilha1.estavazia() && !pilha2.estavazia() && !pilha3.estavazia()){
+                Integer A = pilha1.getTopo().getDado();
+                Integer B = pilha2.getTopo().getDado();
+                Integer C = pilha3.getTopo().getDado();
+                if ((A > B) && (A > C) ) {
+                    if(B<C){
+                        movimentaPilha(3,1,pilha1,  pilha2,  pilha3);
+                    } else {
+                        movimentaPilha(2,1,pilha1,  pilha2,  pilha3);
+                    }
+                } else if ((B > A) && (B > C)) {
+                    if(A>C){
+                        movimentaPilha(1,2,pilha1,  pilha2,  pilha3);
+                    } else {
+                        movimentaPilha(3, 2, pilha1, pilha2, pilha3);
+                    }
+                } else if((C > A) && (C > B)){
+                    if (A > B) {
+                        movimentaPilha(1, 3, pilha1, pilha2, pilha3);
+                    } else {
+                        movimentaPilha(2, 3, pilha1, pilha2, pilha3);
+                    }
                 }
+                jogadas++;
             }
-            if(B == null){
+            if(pilha1.estavazia()){
+                Integer B = pilha2.getTopo().getDado();
+                Integer C = pilha3.getTopo().getDado();
+                if(B<C){
+                    movimentaPilha(3,1,pilha1,  pilha2,  pilha3);
+                } else {
+                    movimentaPilha(2,1,pilha1,  pilha2,  pilha3);
+                }
+                jogadas++;
+            }
+            if(pilha2.estavazia()){
+                Integer A = pilha2.getTopo().getDado();
+                Integer C = pilha3.getTopo().getDado();
                 if(A<C){
                     movimentaPilha(3,1,pilha1,  pilha2,  pilha3);
-
                 } else {
-                    movimentaPilha(1,3,pilha1,  pilha2,  pilha3);
-
+                    movimentaPilha(2,1,pilha1,  pilha2,  pilha3);
                 }
+                jogadas++;
             }
-            if(C == null){
+            if(pilha3.estavazia()){
+                Integer B = pilha2.getTopo().getDado();
+                Integer A = pilha3.getTopo().getDado();
                 if(B<A){
+                    movimentaPilha(3,1,pilha1,  pilha2,  pilha3);
+                } else {
                     movimentaPilha(2,1,pilha1,  pilha2,  pilha3);
-
-                } else {
-                    movimentaPilha(1,2,pilha1,  pilha2,  pilha3);
-
                 }
+                jogadas++;
             }
-            if ((A >= B && A <= C) || (A >= C && A <= B)) {         //valor intermadiario eh A
-                if(B<C){
-                    movimentaPilha(1,3,pilha1,  pilha2,  pilha3);
-                } else {
-                    movimentaPilha(1,2,pilha1,  pilha2,  pilha3);
-                }
-            } else if ((B >= A && B <= C) || (B >= C && B <= A)) {  //valor intermadiario eh B
-                if(A>C){
-                    movimentaPilha(2,1,pilha1,  pilha2,  pilha3);
-                } else {
-                    movimentaPilha(2, 3, pilha1, pilha2, pilha3);
-                }
-            } else {                                                //valor intermadiario eh C
-                if (A > B) {
-                    movimentaPilha(3, 1, pilha1, pilha2, pilha3);
-                } else {
-                    movimentaPilha(3, 2, pilha1, pilha2, pilha3);
-                }
-            }
-            jogadas++;
         }
-
         return jogadas;
     }
 }

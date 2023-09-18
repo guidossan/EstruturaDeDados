@@ -1,7 +1,7 @@
 import java.util.*;
 
 public class Jogo {
-    private static boolean crescente = false;
+    private static final boolean crescente = false;
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         Random random = new Random();
@@ -49,18 +49,18 @@ public class Jogo {
                 movimentaPilha(origem, destino, pilha1, pilha2, pilha3);
                 jogadas++;
 
-                boolean A = verificarOrdenacao(pilha1);
-                boolean B = verificarOrdenacao(pilha2);
-                boolean C = verificarOrdenacao(pilha3);
+                boolean A = verificarOrdenacao(pilha1.getTopo());
+                boolean B = verificarOrdenacao(pilha2.getTopo());
+                boolean C = verificarOrdenacao(pilha3.getTopo());
                 if (  (  A ^ B ^ C ) && ( ! ( A && B && C ) )) {
                     System.out.println("Ordenação concluída em " + jogadas + " jogadas");
                     break;
                 }
             } else if (opcao == 2) {
                 automatica(pilha1, pilha2, pilha3);
-                boolean A = verificarOrdenacao(pilha1);
-                boolean B = verificarOrdenacao(pilha2);
-                boolean C = verificarOrdenacao(pilha3);
+                boolean A = verificarOrdenacao(pilha1.getTopo());
+                boolean B = verificarOrdenacao(pilha2.getTopo());
+                boolean C = verificarOrdenacao(pilha3.getTopo());
                 if (  (  A ^ B ^ C ) && ( ! ( A && B && C ) )) {
                     System.out.println("Ordenação concluída em " + jogadas + " jogadas");
                     break;
@@ -70,36 +70,36 @@ public class Jogo {
 
     }
 
-    public static boolean verificarOrdenacao(PilhaEncadeada pilha ){
-        return crescente ? verificaCres(pilha) : verificaDecre(pilha);
+    public static boolean verificarOrdenacao(Node node ){
+        return verificaCres(node) ^ verificaDecre(node);
     }
-    public static boolean verificaCres(PilhaEncadeada pilha) {
-        if (pilha.getTopo() == null) {
+    public static boolean verificaCres(Node node) {
+        if(node==null){
             return false;
         }
-        Node atual = pilha.getTopo();
-        while (atual.getProximo() != null) {
-            if (atual.getProximo().getDado() < atual.getDado()) {
-                atual = atual.getProximo();
-            } else {
+        Node atual = node;
+        while (atual.getProximo() != null){
+
+            if(atual.getDado() > atual.getProximo().getDado()){
                 return false;
             }
+            return verificaDecre(atual.getProximo());
         }
-        return false;
+        return true;
     }
 
-    public static boolean verificaDecre(PilhaEncadeada pilha){
-        if (pilha.getTopo() == null) {
+    public static boolean verificaDecre(Node node){
+        if(node==null){
             return false;
         }
-        Node atual = pilha.getTopo();
-        while (atual.getProximo() != null) {
-            if (atual.getProximo().getDado() > atual.getDado()) {
-                atual = atual.getProximo();
-            } else {
+        Node atual = node;
+        while (atual.getProximo() != null){
+
+            if(atual.getDado() < atual.getProximo().getDado()){
                 return false;
             }
-        }
+            return verificaDecre(atual.getProximo());
+            }
         return true;
     }
 
@@ -144,7 +144,7 @@ public class Jogo {
         }
     }
 
-    public static int automatica(PilhaEncadeada pilha1, PilhaEncadeada pilha2, PilhaEncadeada pilha3) {
+    public static void automatica(PilhaEncadeada pilha1, PilhaEncadeada pilha2, PilhaEncadeada pilha3) {
         if(pilha1.estavazia()){
             movimentaPilha(2,1,pilha1,  pilha2,  pilha3);
             movimentaPilha(2,3,pilha1,  pilha2,  pilha3);
@@ -155,9 +155,9 @@ public class Jogo {
         }
         int jogadas = 0;
         while(true){
-            boolean a = verificarOrdenacao(pilha1);
-            boolean b = verificarOrdenacao(pilha2);
-            boolean c = verificarOrdenacao(pilha3);
+            boolean a = verificarOrdenacao(pilha1.getTopo());
+            boolean b = verificarOrdenacao(pilha2.getTopo());
+            boolean c = verificarOrdenacao(pilha3.getTopo());
             if ( (  a ^ b ^ c )  && ( ! ( a && b && c ) )) {
                 System.out.println("Ordenação concluída em " + jogadas + " jogadas");
                 break;
@@ -215,6 +215,5 @@ public class Jogo {
             }
 
         }
-        return jogadas;
     }
 }

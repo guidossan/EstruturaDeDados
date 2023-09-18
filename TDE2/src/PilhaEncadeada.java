@@ -46,6 +46,34 @@ public class PilhaEncadeada {
             }
             return false;
         }
+        private boolean crescente(){
+            if (topo == null) {
+                return false;
+            }
+            Node atual = topo;
+            while (atual.getProximo() != null) {
+                if (atual.getProximo().getDado() < atual.getDado()) {
+                    atual = atual.getProximo();
+                } else {
+                    return false;
+                }
+            }
+            return true;
+        }
+        private boolean decrescente(){
+            if (topo == null) {
+                return false;
+            }
+            Node atual = topo;
+            while (atual.getProximo() != null) {
+                if (atual.getProximo().getDado() > atual.getDado()) {
+                    atual = atual.getProximo();
+                } else {
+                    return false;
+                }
+            }
+            return true;
+        }
         public Node getPrimeiro(){
             return base;
         }

@@ -1,7 +1,7 @@
 import java.util.*;
 
 public class Jogo {
-
+    private static boolean crescente = false;
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         Random random = new Random();
@@ -57,19 +57,27 @@ public class Jogo {
                     break;
                 }
             } else if (opcao == 2) {
-                System.out.println("Ordenação concluída em " + automatica(pilha1, pilha2, pilha3)+ " jogadas");
+                automatica(pilha1, pilha2, pilha3);
+                boolean A = verificarOrdenacao(pilha1);
+                boolean B = verificarOrdenacao(pilha2);
+                boolean C = verificarOrdenacao(pilha3);
+                if (  (  A ^ B ^ C ) && ( ! ( A && B && C ) )) {
+                    System.out.println("Ordenação concluída em " + jogadas + " jogadas");
+                    break;
+                }
             }
         }
 
     }
+
     public static boolean verificarOrdenacao(PilhaEncadeada pilha ){
-        return verificaCres(pilha) || verificaDecre(pilha);
+        return crescente ? verificaCres(pilha) : verificaDecre(pilha);
     }
     public static boolean verificaCres(PilhaEncadeada pilha) {
-        Node atual = pilha.getTopo();
-        if (atual == null) {
+        if (pilha.getTopo() == null) {
             return false;
         }
+        Node atual = pilha.getTopo();
         while (atual.getProximo() != null) {
             if (atual.getProximo().getDado() < atual.getDado()) {
                 atual = atual.getProximo();
@@ -81,10 +89,10 @@ public class Jogo {
     }
 
     public static boolean verificaDecre(PilhaEncadeada pilha){
-        Node atual = pilha.getTopo();
-        if (atual == null) {
+        if (pilha.getTopo() == null) {
             return false;
         }
+        Node atual = pilha.getTopo();
         while (atual.getProximo() != null) {
             if (atual.getProximo().getDado() > atual.getDado()) {
                 atual = atual.getProximo();
@@ -177,14 +185,33 @@ public class Jogo {
                         movimentaPilha(2, 3, pilha1, pilha2, pilha3);
                     }
                 }
-                if ((pilha1.getTopo() == null || A >= B) && (pilha1.getTopo() == null || A <= C)) {
+                if (( A >= B) && ( A <= C)) {
                     movimentaPilha(1, 3, pilha1, pilha2, pilha3);
-                } else if ((pilha2.getTopo() == null || B >= A) && (pilha2.getTopo() == null || B <= C)) {
+                } else if ((B >= A) && ( B <= C)) {
                     movimentaPilha(2, 3, pilha1, pilha2, pilha3);
-                } else if ((pilha3.getTopo() == null || C >= A) && (pilha3.getTopo() == null || C <= B)) {
+                } else if (( C >= A) && (C <= B)) {
                     movimentaPilha(3, 1, pilha1, pilha2, pilha3);
                 }
                 jogadas++;
+            }
+            if(pilha1.estavazia()&& (!pilha2.estavazia()&&!pilha3.estavazia())){
+                if(pilha2.getTopo().getDado()>pilha3.getTopo().getDado()){
+                    movimentaPilha(3,2,pilha1,  pilha2,  pilha3);
+                } else {
+                    movimentaPilha(2, 3, pilha1, pilha2, pilha3);
+                }
+            } else if (pilha2.estavazia()&& (!pilha1.estavazia()&&!pilha3.estavazia())){
+                if(pilha1.getTopo().getDado()>pilha3.getTopo().getDado()){
+                    movimentaPilha(3,1,pilha1,  pilha2,  pilha3);
+                } else {
+                    movimentaPilha(1, 3, pilha1, pilha2, pilha3);
+                }
+            } else if(pilha3.estavazia()&& (!pilha1.estavazia()&&!pilha2.estavazia())){
+                if(pilha1.getTopo().getDado()>pilha2.getTopo().getDado()){
+                    movimentaPilha(2,1,pilha1,  pilha2,  pilha3);
+                } else {
+                    movimentaPilha(1, 2, pilha1, pilha2, pilha3);
+                }
             }
 
         }

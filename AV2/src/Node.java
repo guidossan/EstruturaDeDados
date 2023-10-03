@@ -20,13 +20,7 @@ public class Node {
             return no.getAltura();
         }
     }
-    public int fatorBalanciamento(Node no){
-        if (no!=null) {
-            return altura(no.getEsquerdo())-altura(no.getDireito());
-        } else {
-            return 0;
-        }
-    }
+
 
     public int getAltura(){
         return altura;

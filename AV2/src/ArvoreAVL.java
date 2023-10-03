@@ -1,20 +1,72 @@
 public class ArvoreAVL {
     public Node raiz;
-    public void inserir(int informacao){
+    public void inserir(int informacao) {
         Node no = new Node(informacao);
 
         if(raiz == null){
-            raiz=no;
-        } else{
-            if(informacao >= raiz.getDado()){
-                raiz.setDireito(no);
-            }else if(informacao < raiz.getDado()){
-                raiz.setEsquerdo(no);
+            raiz = no;
+            return;
+        }
+
+        Node noAtual = raiz;
+
+        while(true){
+            Node pai = noAtual;
+
+            if(informacao < noAtual.getDado()){
+                noAtual = noAtual.getEsquerdo();
+                if (noAtual == null) {
+                    pai.setEsquerdo(no);
+                    break;
+                }
+            } else if(informacao >= noAtual.getDado()){
+                noAtual = noAtual.getDireito();
+                if (noAtual == null) {
+                    pai.setDireito(no);
+                    break;
+                }
             }
         }
+        balancear(raiz);
     }
-    public void remover(){
 
+    public void remover(int valorRomover){
+        Node atual = raiz;
+        while(atual!=null){
+            if(raiz == null){
+                System.out.println("Valor nao encontrado");
+            }else{
+                if(raiz.getDado()==valorRomover){
+                    raiz = raiz.getDireito();
+                }else{
+                    if(valorRomover < raiz.getDado()){
+                        atual = raiz.getEsquerdo();
+                    }else if(valorRomover >= raiz.getDado()){
+                        atual = raiz.getDireito();
+                    }
+                }
+            }
+
+        }
+    }
+    public void balancear(Node raiz){
+        int fb = fatorBalanciamento(raiz);
+        if(fb < -1 && fatorBalanciamento(raiz.getDireito())<=0){
+            rotacionarEsquerda(raiz);
+        } else if (fb >1 && fatorBalanciamento(raiz.getDireito())>=0){
+            rotacionarEsquerda(raiz);
+        } else if (fb >1 && fatorBalanciamento(raiz.getDireito())<0){
+            rotacionarEsquerda(raiz);
+        } else if (fb <-1 && fatorBalanciamento(raiz.getDireito())>0){
+            rotacionarEsquerda(raiz);
+        }
+    }
+    public int fatorBalanciamento(Node no){
+        if (no!=null) {
+            return no.altura(no.getEsquerdo())-no.altura(no.getDireito());
+        } else {
+            return 0;
+        }
     }
     public void rotacionarEsquerda(Node no){
         Node novaRaiz = no.getDireito();

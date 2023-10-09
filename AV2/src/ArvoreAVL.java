@@ -1,3 +1,4 @@
+import java.util.Stack;
 public class ArvoreAVL {
     public Node raiz;
     public void inserir(int informacao) {
@@ -94,4 +95,22 @@ public class ArvoreAVL {
         no.setEsquerdo(no.getEsquerdo().getDireito());
         rotacionarDireita(no);
     }
+
+    public void imprimir() {
+        imprimirArvore(raiz, "", false);
+    }
+
+    private void imprimirArvore(Node no, String prefix, boolean isEsquerdo) {
+        if (no != null) {
+            System.out.print(prefix);
+            System.out.print(isEsquerdo ? "├─ " : "└─ ");
+            System.out.println(no.getDado());
+
+            imprimirArvore(no.getEsquerdo(), prefix + (isEsquerdo ? "│  " : "   "), true);
+            imprimirArvore(no.getDireito(), prefix + (isEsquerdo ? "│  " : "   "), false);
+        }
+    }
+
+
+
 }

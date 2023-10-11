@@ -8,6 +8,11 @@ public class Main {
         arvore.inserir(74);
         arvore.inserir(32);
         arvore.inserir(9);
+        arvore.inserir(80);
+        arvore.inserir(75);
+        arvore.inserir(76);
+        arvore.inserir(77);
+        arvore.inserir(78);
         arvore.imprimir();
     }
 }

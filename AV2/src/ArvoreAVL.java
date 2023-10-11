@@ -1,12 +1,11 @@
 import java.util.Stack;
 public class ArvoreAVL {
     public Node raiz;
-    public void inserir(int informacao) {
+    public ArvoreAVL inserir(int informacao) {
         Node no = new Node(informacao);
 
         if(raiz == null){
             raiz = no;
-            return;
         }
 
         Node noAtual = raiz;
@@ -29,6 +28,7 @@ public class ArvoreAVL {
             }
         }
         balancear(raiz);
+        return this;
     }
 
     public void remover(int valorRomover){
@@ -50,24 +50,23 @@ public class ArvoreAVL {
 
         }
     }
-    public void balancear(Node raiz){
-        int fb = fatorBalanciamento(raiz);
-        if(fb < -1 && fatorBalanciamento(raiz.getDireito())<=0){
-            rotacionarEsquerda(raiz);
-        } else if (fb >1 && fatorBalanciamento(raiz.getDireito())>=0){
-            rotacionarEsquerda(raiz);
-        } else if (fb >1 && fatorBalanciamento(raiz.getDireito())<0){
-            rotacionarEsquerda(raiz);
-        } else if (fb <-1 && fatorBalanciamento(raiz.getDireito())>0){
-            rotacionarEsquerda(raiz);
+    public void balancear(Node atual){
+        int fb = fatorBalanciamento(atual);
+        if(fb == -2){
+            rotacionarEsquerda(atual);
+        }else if(fb == 2){
+            rotacionarDireita(atual);
         }
     }
     public int fatorBalanciamento(Node no){
-        if (no!=null) {
-            return no.altura(no.getEsquerdo())-no.altura(no.getDireito());
-        } else {
+        if(no.getEsquerdo()==null && no.getDireito()==null){
             return 0;
+        }else if(no.getDireito()==null) {
+            return 1;
+        }else if(no.getEsquerdo()==null){
+            return -1;
         }
+        return (fatorBalanciamento(no.getEsquerdo()) - fatorBalanciamento(no.getDireito())-1);
     }
     public void rotacionarEsquerda(Node no){
         Node novaRaiz = no.getDireito();
@@ -106,8 +105,8 @@ public class ArvoreAVL {
             System.out.print(isEsquerdo ? "├─ " : "└─ ");
             System.out.println(no.getDado());
 
-            imprimirArvore(no.getEsquerdo(), prefix + (isEsquerdo ? "│  " : "   "), true);
-            imprimirArvore(no.getDireito(), prefix + (isEsquerdo ? "│  " : "   "), false);
+            imprimirArvore(no.getDireito(), prefix + (isEsquerdo ? "│  " : "   "), true);
+            imprimirArvore(no.getEsquerdo(), prefix + (isEsquerdo ? "│  " : "   "), false);
         }
     }
 

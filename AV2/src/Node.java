@@ -13,11 +13,16 @@ public class Node {
         this.balanceamento = 0;
     }
     public int calcBalanceamento(){
-        int alturaEsquerda = (this.getEsquerdo() != null) ? this.esquerdo.calcAltura() : -1;
-        int alturaDireita = (this.getDireito() != null) ? this.direito.calcAltura() : -1;
-        int balanceamentoA = alturaEsquerda - alturaDireita;
-        setBalanceamento(balanceamentoA);
-        return 1 + Math.max(alturaEsquerda, alturaDireita);
+        if(this.esquerdo == null && this.direito == null){
+            return 0;
+        } else if (this.esquerdo != null && this.direito == null) {
+            this.balanceamento = 1 + this.esquerdo.calcBalanceamento();
+        } else if (this.esquerdo == null && this.direito != null) {
+            this.balanceamento = 1 - this.direito.calcBalanceamento();
+        } else{
+            this.balanceamento = (this.esquerdo.calcBalanceamento()) + (this.direito.calcBalanceamento())-1;
+        }
+        return 0;
     }
     public int calcAltura() {
         int alturaEsquerda = (this.esquerdo != null) ? this.esquerdo.calcAltura() : 0;
@@ -27,8 +32,8 @@ public class Node {
     }
 
 
-    public String toString(){
-        return "["+this.getDado()+"]("+this.balanceamento+")";
+    public String toStrinG(){
+        return "("+this.balanceamento+")";
     }
 
     public void setBalanceamento(int balanceamento){

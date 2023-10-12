@@ -20,7 +20,7 @@ public class ArvoreAVL {
                 } else {
                     noAtual = noAtual.getEsquerdo();
                 }
-            } else if (informacao > noAtual.getDado()) {
+            } else if (informacao >= noAtual.getDado()) {
                 if (noAtual.getDireito() == null) {
                     noAtual.setDireito(novoNo);
                     noAtual.calcBalanceamento();
@@ -29,10 +29,22 @@ public class ArvoreAVL {
                     noAtual = noAtual.getDireito();
                 }
             } else {
-                // O valor já existe na árvore, você pode tratar como preferir, por exemplo, ignorar ou lançar uma exceção.
-                return; // Ou lançar uma exceção, se preferir.
+                return;
             }
         }
+    }
+    public int calcBalanceamento(){
+        Node atual = raiz;
+        if(atual.getEsquerdo() == null && atual.getDireito() == null){
+            return 0;
+        } else if (atual.getEsquerdo() != null && atual.getDireito() == null) {
+            atual.balanceamento = 1 - atual.getEsquerdo().calcBalanceamento();
+        } else if (atual.getEsquerdo() == null && atual.getDireito() != null) {
+            atual.balanceamento = 1 + atual.getDireito().calcBalanceamento();
+        } else{
+            atual.balanceamento = (atual.getEsquerdo().calcBalanceamento()) + (atual.getDireito().calcBalanceamento())-1;
+        }
+        return 0;
     }
 
 //        public void remover ( int valorRomover){
@@ -102,20 +114,21 @@ public class ArvoreAVL {
     }
 
     public void imprimir() {
-        imprimirArvore(raiz, "",true);
-        System.out.println(raiz.toStrinG());
+        imprimirArvore(raiz, "",false);
+
     }
 
-    private void imprimirArvore(Node no, String prefix, boolean isLast) {
+    private void imprimirArvore(Node no, String prefix, boolean isLeft) {
         if (no != null) {
-            System.out.println(prefix + (isLast ? "└── " : "├── ") + no.getDado());
+            System.out.println(prefix + (isLeft ? "├─ " : "└─ ") + no.getDado());
 
-            if (no.getDireito() != null || no.getEsquerdo() != null) {
-                imprimirArvore(no.getDireito(), prefix + (isLast ? "    " : "│   "), false);
-                imprimirArvore(no.getEsquerdo(), prefix + (isLast ? "    " : "│   "), true);
-            }
+            imprimirArvore(no.getEsquerdo(), prefix + (isLeft ? "│  " : "   "), true);
+            imprimirArvore(no.getDireito(), prefix + (isLeft ? "│  " : "   "), false);
         }
     }
+
+
+
 
 
 

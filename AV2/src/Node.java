@@ -16,9 +16,9 @@ public class Node {
         if(this.esquerdo == null && this.direito == null){
             return 0;
         } else if (this.esquerdo != null && this.direito == null) {
-            this.balanceamento = 1 + this.esquerdo.calcBalanceamento();
+            this.balanceamento = 1 - this.esquerdo.calcBalanceamento();
         } else if (this.esquerdo == null && this.direito != null) {
-            this.balanceamento = 1 - this.direito.calcBalanceamento();
+            this.balanceamento = 1 + this.direito.calcBalanceamento();
         } else{
             this.balanceamento = (this.esquerdo.calcBalanceamento()) + (this.direito.calcBalanceamento())-1;
         }

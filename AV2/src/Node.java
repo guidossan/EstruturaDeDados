@@ -3,30 +3,39 @@ public class Node {
     private Node esquerdo;
     private Node direito;
     private int altura;
+    public int balanceamento;
 
     public Node(int informacao) {
         this.informacao = informacao;
         this.esquerdo = null;
         this.direito = null;
         this.altura = 0;
+        this.balanceamento = 0;
     }
-    public int maior(int esquerdo, int direito){
-        return esquerdo > direito? esquerdo : direito;
+    public int calcBalanceamento(){
+        int alturaEsquerda = (this.getEsquerdo() != null) ? this.esquerdo.calcAltura() : -1;
+        int alturaDireita = (this.getDireito() != null) ? this.direito.calcAltura() : -1;
+        int balanceamentoA = alturaEsquerda - alturaDireita;
+        setBalanceamento(balanceamentoA);
+        return 1 + Math.max(alturaEsquerda, alturaDireita);
     }
-    public int altura(Node no){
-        if(no == null){
-            return -1;
-        } else{
-            return no.getAltura();
-        }
+    public int calcAltura() {
+        int alturaEsquerda = (this.esquerdo != null) ? this.esquerdo.calcAltura() : 0;
+        int alturaDireita = (this.direito != null) ? this.direito.calcAltura() : 0;
+
+        return 1 + Math.max(alturaEsquerda, alturaDireita);
     }
 
 
+    public String toString(){
+        return "["+this.getDado()+"]("+this.balanceamento+")";
+    }
+
+    public void setBalanceamento(int balanceamento){
+        this.balanceamento = balanceamento;
+    }
     public int getAltura(){
         return altura;
-    }
-    public void setAltura(int altura) {
-        this.altura = altura;
     }
 
     public Integer getDado() {

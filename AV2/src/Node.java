@@ -12,23 +12,34 @@ public class Node {
         this.altura = 0;
         this.balanceamento = 0;
     }
-    public int calcBalanceamento(){
+    public void calcBalanceamento(){
         if(this.esquerdo == null && this.direito == null){
-            return 0;
+            this.balanceamento=0;
         } else if (this.esquerdo != null && this.direito == null) {
-            this.balanceamento = 1 - this.esquerdo.calcBalanceamento();
+            this.balanceamento = this.esquerdo.calcAltura();
         } else if (this.esquerdo == null && this.direito != null) {
-            this.balanceamento = 1 + this.direito.calcBalanceamento();
-        } else{
-            this.balanceamento = (this.esquerdo.calcBalanceamento()) + (this.direito.calcBalanceamento())-1;
+            this.balanceamento = 0 - this.direito.calcAltura();
+        }else {
+            this.balanceamento = this.direito.calcAltura() - this.esquerdo.calcAltura();
         }
-        return 0;
+        if(this.esquerdo!=null){
+            this.esquerdo.calcBalanceamento();
+        }
+        if(this.direito!=null){
+            this.direito.calcBalanceamento();
+        }
+
     }
     public int calcAltura() {
-        int alturaEsquerda = (this.esquerdo != null) ? this.esquerdo.calcAltura() : 0;
-        int alturaDireita = (this.direito != null) ? this.direito.calcAltura() : 0;
-
-        return 1 + Math.max(alturaEsquerda, alturaDireita);
+        if(this.esquerdo == null && this.direito == null){
+            return 1;
+        } else if (this.esquerdo != null && this.direito == null) {
+            return 1 +this.esquerdo.calcAltura();
+        } else if (this.esquerdo == null && this.direito != null) {
+            return 1 +this.direito.calcAltura();
+        }else {
+            return 1 +Math.max(this.esquerdo.calcAltura(),this.direito.calcAltura());
+        }
     }
 
 
@@ -38,6 +49,9 @@ public class Node {
 
     public void setBalanceamento(int balanceamento){
         this.balanceamento = balanceamento;
+    }
+    public int getBalanceamento(){
+        return balanceamento;
     }
     public int getAltura(){
         return altura;
@@ -66,4 +80,5 @@ public class Node {
     public void setDireito(Node proximo) {
         this.direito = proximo;
     }
+
 }

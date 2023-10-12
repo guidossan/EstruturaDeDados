@@ -15,7 +15,7 @@ public class ArvoreAVL {
             if (informacao < noAtual.getDado()) {
                 if (noAtual.getEsquerdo() == null) {
                     noAtual.setEsquerdo(novoNo);
-                    noAtual.calcBalanceamento();
+                    raiz.calcBalanceamento();
                     return; // Inseriu o nó e sai do loop
                 } else {
                     noAtual = noAtual.getEsquerdo();
@@ -23,7 +23,7 @@ public class ArvoreAVL {
             } else if (informacao >= noAtual.getDado()) {
                 if (noAtual.getDireito() == null) {
                     noAtual.setDireito(novoNo);
-                    noAtual.calcBalanceamento();
+                    raiz.calcBalanceamento();
                     return; // Inseriu o nó e sai do loop
                 } else {
                     noAtual = noAtual.getDireito();
@@ -33,19 +33,22 @@ public class ArvoreAVL {
             }
         }
     }
-    public int calcBalanceamento(){
-        Node atual = raiz;
-        if(atual.getEsquerdo() == null && atual.getDireito() == null){
-            return 0;
-        } else if (atual.getEsquerdo() != null && atual.getDireito() == null) {
-            atual.balanceamento = 1 - atual.getEsquerdo().calcBalanceamento();
-        } else if (atual.getEsquerdo() == null && atual.getDireito() != null) {
-            atual.balanceamento = 1 + atual.getDireito().calcBalanceamento();
-        } else{
-            atual.balanceamento = (atual.getEsquerdo().calcBalanceamento()) + (atual.getDireito().calcBalanceamento())-1;
-        }
-        return 0;
-    }
+//    public void calcBalanceamento(){
+//        while(raiz!=null){
+//            Node atual = raiz;
+//            if(atual.getEsquerdo() == null && atual.getDireito() == null){
+//                atual.setBalanceamento(0);
+//            } else if (atual.getEsquerdo() != null && atual.getDireito() == null)
+//                atual.setBalanceamento(1);
+//            else if (atual.getEsquerdo() == null && atual.getDireito() != null) {
+//                atual.setBalanceamento(-1);
+//            }
+//            atual.setBalanceamento((atual.getEsquerdo().calcBalanceamento()) + (atual.getDireito().calcBalanceamento())-1);
+//        }
+
+
+
+//    }
 
 //        public void remover ( int valorRomover){
 //            Node atual = raiz;
@@ -75,16 +78,16 @@ public class ArvoreAVL {
 //                rotacionarDireita(atual);
 //            }
 //        }
-        public int fatorBalanciamento (Node no){
-            if (no.getEsquerdo() == null && no.getDireito() == null) {
-                return 0;
-            } else if (no.getEsquerdo() != null && no.getDireito() == null) {
-                return 1;
-            } else if (no.getDireito() != null && no.getEsquerdo() == null) {
-                return -1;
-            }
-            return 1 + Math.max(fatorBalanciamento(no.getEsquerdo()), fatorBalanciamento(no.getDireito()));
-        }
+//        public int fatorBalanciamento (Node no){
+//            if (no.getEsquerdo() == null && no.getDireito() == null) {
+//                return 0;
+//            } else if (no.getEsquerdo() != null && no.getDireito() == null) {
+//                return 1;
+//            } else if (no.getDireito() != null && no.getEsquerdo() == null) {
+//                return -1;
+//            }
+//            return 1 + Math.max(fatorBalanciamento(no.getEsquerdo()), fatorBalanciamento(no.getDireito()));
+//        }
 //        public void rotacionarEsquerda (Node no){
 //            Node novaRaiz = no.getDireito();
 //            Node temp = no.getDireito().getEsquerdo();
@@ -109,13 +112,13 @@ public class ArvoreAVL {
 //            no.setEsquerdo(no.getEsquerdo().getDireito());
 //            rotacionarDireita(no);
 //        }
-    public boolean isEmpty() {
-        return raiz == null;
-    }
+//    public boolean isEmpty() {
+//        return raiz == null;
+//    }
 
     public void imprimir() {
         imprimirArvore(raiz, "",false);
-
+        System.out.println(raiz.getBalanceamento());
     }
 
     private void imprimirArvore(Node no, String prefix, boolean isLeft) {

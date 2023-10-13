@@ -16,6 +16,7 @@ public class ArvoreAVL {
                 if (noAtual.getEsquerdo() == null) {
                     noAtual.setEsquerdo(novoNo);
                     raiz.calcBalanceamento();
+                    precisaBalancear();
                     return; // Inseriu o nó e sai do loop
                 } else {
                     noAtual = noAtual.getEsquerdo();
@@ -24,6 +25,7 @@ public class ArvoreAVL {
                 if (noAtual.getDireito() == null) {
                     noAtual.setDireito(novoNo);
                     raiz.calcBalanceamento();
+                    precisaBalancear();
                     return; // Inseriu o nó e sai do loop
                 } else {
                     noAtual = noAtual.getDireito();
@@ -33,22 +35,25 @@ public class ArvoreAVL {
             }
         }
     }
-//    public void calcBalanceamento(){
-//        while(raiz!=null){
-//            Node atual = raiz;
-//            if(atual.getEsquerdo() == null && atual.getDireito() == null){
-//                atual.setBalanceamento(0);
-//            } else if (atual.getEsquerdo() != null && atual.getDireito() == null)
-//                atual.setBalanceamento(1);
-//            else if (atual.getEsquerdo() == null && atual.getDireito() != null) {
-//                atual.setBalanceamento(-1);
-//            }
-//            atual.setBalanceamento((atual.getEsquerdo().calcBalanceamento()) + (atual.getDireito().calcBalanceamento())-1);
-//        }
-
-
-
-//    }
+    public boolean precisaBalancear(){
+        int bal = raiz.balanceamento;
+        if(bal >=2 ||bal <=-2){
+            if(bal == 2){
+                rotacionarEsquerda(raiz);
+                imprimir();
+                if(raiz.getEsquerdo().balanceamento==-1||raiz.getDireito().balanceamento==-1){
+                    System.out.println("duplarotacao esqueda direita");
+                }
+            }else if(bal == -2){
+                rotacionarDireita(raiz);
+                imprimir();
+                if(raiz.getEsquerdo().balanceamento==1||raiz.getDireito().balanceamento==1){
+                    System.out.println("duplarotacao direita esquerda");
+                }
+            }
+        }
+        return false;
+    }
 
 //        public void remover ( int valorRomover){
 //            Node atual = raiz;
@@ -70,40 +75,31 @@ public class ArvoreAVL {
 //            }
 //        }
 
-//        public void balancear (Node atual){
-//            int fb = fatorBalanciamento(atual);
-//            if (fb == -2) {
-//                rotacionarEsquerda(atual);
-//            } else if (fb == 2) {
-//                rotacionarDireita(atual);
-//            }
-//        }
-//        public int fatorBalanciamento (Node no){
-//            if (no.getEsquerdo() == null && no.getDireito() == null) {
-//                return 0;
-//            } else if (no.getEsquerdo() != null && no.getDireito() == null) {
-//                return 1;
-//            } else if (no.getDireito() != null && no.getEsquerdo() == null) {
-//                return -1;
-//            }
-//            return 1 + Math.max(fatorBalanciamento(no.getEsquerdo()), fatorBalanciamento(no.getDireito()));
-//        }
-//        public void rotacionarEsquerda (Node no){
-//            Node novaRaiz = no.getDireito();
-//            Node temp = no.getDireito().getEsquerdo();
-//            novaRaiz.setEsquerdo(no);
-//            novaRaiz.getEsquerdo().setDireito(temp);
-//
-//
-//        }
-//        public void rotacionarDireita (Node no){
-//            Node novaRaiz = no.getEsquerdo();
-//            Node temp = no.getEsquerdo().getDireito();
-//            novaRaiz.setDireito(no);
-//            novaRaiz.getDireito().setDireito(temp);
-//
-//
-//        }
+
+        public Node rotacionarEsquerda (Node no){
+            if(no.getDireito().getEsquerdo()!=null){//diz que .getEsquerdo eh nulo
+                Node novaRaiz = no.getDireito();
+                Node temp = no.getDireito().getEsquerdo();//aqui tambem seria
+                novaRaiz.setEsquerdo(no);
+                novaRaiz.getEsquerdo().setDireito(temp);
+                return novaRaiz;
+            }
+            Node novaRaiz = no.getDireito();
+            novaRaiz.setEsquerdo(no);
+            return novaRaiz;
+        }
+        public Node rotacionarDireita (Node no){
+            if(no.getEsquerdo().getDireito()!=null){
+                Node novaRaiz = no.getEsquerdo();
+                Node temp = no.getEsquerdo().getDireito();
+                novaRaiz.setDireito(no);
+                novaRaiz.getDireito().setDireito(temp);
+                return novaRaiz;
+            }
+            Node novaRaiz = no.getEsquerdo();
+            novaRaiz.setDireito(no);
+            return novaRaiz;
+        }
 //        public void rotacaoDireitaEsquerda (Node no){
 //            no.setDireito(no.getDireito().getEsquerdo());
 //            rotacionarEsquerda(no);

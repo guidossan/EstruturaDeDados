@@ -14,13 +14,13 @@ public class Node {
     }
     public void calcBalanceamento(){
         if(this.esquerdo == null && this.direito == null){
-            this.balanceamento=0;
+            this.balanceamento=0;//sem filhos
         } else if (this.esquerdo != null && this.direito == null) {
-            this.balanceamento = this.esquerdo.calcAltura();
+            this.balanceamento = this.esquerdo.calcAltura();//filho esquerdo
         } else if (this.esquerdo == null && this.direito != null) {
-            this.balanceamento = 0 - this.direito.calcAltura();
+            this.balanceamento = 0 - this.direito.calcAltura();//filho direito
         }else {
-            this.balanceamento = this.direito.calcAltura() - this.esquerdo.calcAltura();
+            this.balanceamento = this.direito.calcAltura() - this.esquerdo.calcAltura();//se houver os dois
         }
         if(this.esquerdo!=null){
             this.esquerdo.calcBalanceamento();
@@ -38,7 +38,7 @@ public class Node {
         } else if (this.esquerdo == null && this.direito != null) {
             return 1 +this.direito.calcAltura();
         }else {
-            return 1 +Math.max(this.esquerdo.calcAltura(),this.direito.calcAltura());
+            return 1 + Math.max(this.esquerdo.calcAltura(),this.direito.calcAltura());
         }
     }
 

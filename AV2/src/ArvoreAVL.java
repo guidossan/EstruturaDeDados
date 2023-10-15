@@ -39,13 +39,15 @@ public class ArvoreAVL {
         int bal = raiz.balanceamento;
         if(bal >=2 ||bal <=-2){
             if(bal == 2){
-                rotacionarEsquerda(raiz);
+//                rotacionarEsquerda(raiz);
+                System.out.println("Rotacao esquerda");
                 imprimir();
                 if(raiz.getEsquerdo().balanceamento==-1||raiz.getDireito().balanceamento==-1){
                     System.out.println("duplarotacao esqueda direita");
                 }
             }else if(bal == -2){
-                rotacionarDireita(raiz);
+//                rotacionarDireita(raiz);
+                System.out.println("Rotacao direita");
                 imprimir();
                 if(raiz.getEsquerdo().balanceamento==1||raiz.getDireito().balanceamento==1){
                     System.out.println("duplarotacao direita esquerda");
@@ -76,30 +78,30 @@ public class ArvoreAVL {
 //        }
 
 
-        public Node rotacionarEsquerda (Node no){
-            if(no.getDireito().getEsquerdo()!=null){//diz que .getEsquerdo eh nulo
-                Node novaRaiz = no.getDireito();
-                Node temp = no.getDireito().getEsquerdo();//aqui tambem seria
-                novaRaiz.setEsquerdo(no);
-                novaRaiz.getEsquerdo().setDireito(temp);
-                return novaRaiz;
-            }
-            Node novaRaiz = no.getDireito();
-            novaRaiz.setEsquerdo(no);
-            return novaRaiz;
-        }
-        public Node rotacionarDireita (Node no){
-            if(no.getEsquerdo().getDireito()!=null){
-                Node novaRaiz = no.getEsquerdo();
-                Node temp = no.getEsquerdo().getDireito();
-                novaRaiz.setDireito(no);
-                novaRaiz.getDireito().setDireito(temp);
-                return novaRaiz;
-            }
-            Node novaRaiz = no.getEsquerdo();
-            novaRaiz.setDireito(no);
-            return novaRaiz;
-        }
+//        public Node rotacionarEsquerda (Node no){
+//            if(no.getDireito().getEsquerdo()!=null){//diz que .getEsquerdo eh nulo
+//                Node novaRaiz = no.getDireito();
+//                Node temp = no.getDireito().getEsquerdo();//aqui tambem seria
+//                novaRaiz.setEsquerdo(no);
+//                novaRaiz.getEsquerdo().setDireito(temp);
+//                return novaRaiz;
+//            }
+//            Node novaRaiz = no.getDireito();
+//            novaRaiz.setEsquerdo(no);
+//            return novaRaiz;
+//        }
+//        public Node rotacionarDireita (Node no){
+//            if(no.getEsquerdo().getDireito()!=null){
+//                Node novaRaiz = no.getEsquerdo();
+//                Node temp = no.getEsquerdo().getDireito();
+//                novaRaiz.setDireito(no);
+//                novaRaiz.getDireito().setDireito(temp);
+//                return novaRaiz;
+//            }
+//            Node novaRaiz = no.getEsquerdo();
+//            novaRaiz.setDireito(no);
+//            return novaRaiz;
+//        }
 //        public void rotacaoDireitaEsquerda (Node no){
 //            no.setDireito(no.getDireito().getEsquerdo());
 //            rotacionarEsquerda(no);

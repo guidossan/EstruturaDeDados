@@ -43,14 +43,14 @@ public class ArvoreAVL {
                 System.out.println("Rotacao esquerda");
                 imprimir();
                 if(raiz.getEsquerdo().balanceamento==-1||raiz.getDireito().balanceamento==-1){
-                    System.out.println("duplarotacao esqueda direita");
+
                 }
             }else if(bal == -2){
 //                rotacionarDireita(raiz);
                 System.out.println("Rotacao direita");
                 imprimir();
                 if(raiz.getEsquerdo().balanceamento==1||raiz.getDireito().balanceamento==1){
-                    System.out.println("duplarotacao direita esquerda");
+
                 }
             }
         }

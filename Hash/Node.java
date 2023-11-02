@@ -1,20 +1,24 @@
 package Hash;
 
 public class Node {
-    private Integer informacao;
+    private Integer registro;
     private Node proximo;
 
     public Node(int informacao){
-        this.informacao = informacao;
+        this.registro = informacao;
+        this.proximo = null;
+    }
+    public Node(){
+        this.registro = null;
         this.proximo = null;
     }
 
     public Integer getDado() {
-        return informacao;
+        return registro;
     }
 
     public void setDado(Integer informacao) {
-        this.informacao = informacao;
+        this.registro = informacao;
     }
 
     public Node getProximo() {

@@ -23,6 +23,4 @@ public class Node {
         public void setProximo(Node proximo) {
             this.proximo = proximo;
         }
-
-
 }

@@ -10,9 +10,12 @@ public class tabelaHash{
         this.tabela = new Node[tamanho];
 
         for (int i = 0; i < tamanho; i++) {
-            for (int p = 1; p<tamanho; p++) {
-                tabela[i] = posicao(p);
+            if(i == 0){
+                tabela[i] = posicao(0);
+            }else{
+                tabela[i] = posicao(i);
             }
+
         }
     }
     public Node posicao(int p){

@@ -45,11 +45,16 @@ public class tabelaHash{
     public void buscar(int registro){
         posicaoHash = registro % tamanho;
         Node noBuscado = tabela[posicaoHash];
+        long startTime = System.nanoTime();
         if (noBuscado != null) {
             System.out.print(noBuscado.getDado());
             Node proximo = noBuscado.getProximo();
             if (proximo != null) {
-                System.out.print(proximo.getDado());
+                System.out.print("Dado:" + proximo.getDado());
+                System.out.println("Posicao:" + posicaoHash);
+                long endTime = System.nanoTime();
+                double tempoExecucao = (endTime - startTime) / 1_000_000.0;
+                System.out.println("O tempo de execução para buscar o dado foi de: " + tempoExecucao);
             }
         }
         System.out.println();

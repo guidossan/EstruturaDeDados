@@ -1,11 +1,11 @@
 package Hash;
-public class tabelaHash{
+public class tabelaHashResto {
     int tamanho = 0;
     int posicaoHash;
     Node[] tabela;
     Node contador;
 
-    public tabelaHash(int tamanho) {
+    public tabelaHashResto(int tamanho) {
         this.tamanho = tamanho;
         this.tabela = new Node[tamanho];
 
@@ -27,7 +27,7 @@ public class tabelaHash{
     public int getTamanho(){
         return tamanho;
     }
-    public void insereHash(int registro){
+    public void insereHashResto(int registro){
         posicaoHash = registro % tamanho;
         Node no = new Node(registro);
         Node noAtual = tabela[posicaoHash];

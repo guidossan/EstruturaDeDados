@@ -14,12 +14,14 @@ public class Mergesort {
         int mid = n / 2;
         int[] l = new int[mid];
         int[] r = new int[n - mid];
+        //dividir em listas menores
         for (int i = 0; i < mid; i++) {
             l[i] = a[i];
         }
         for (int i = mid; i < n; i++) {
             r[i - mid] = a[i];
         }
+        //dividir em array menores para comparacao e ordenação desses menores
         mergeSort(l, mid);
         mergeSort(r, n - mid);
 
@@ -28,6 +30,7 @@ public class Mergesort {
     public static void merge(int[] a, int[] l, int[] r, int left, int right) {
         int i = 0, j = 0, k = 0;
         while (i < left && j < right) {
+            //faz o merge
             if (l[i] <= r[j]) {
                 a[k++] = l[i++];
             }
@@ -35,6 +38,7 @@ public class Mergesort {
                 a[k++] = r[j++];
             }
         }
+        //caso ainda hava nas listas l e r
         while (i < left) {
             a[k++] = l[i++];
         }

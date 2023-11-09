@@ -2,6 +2,7 @@ public class Bubblesort {
     int[]vetor;
     int tamanho;
 
+
     public Bubblesort() {
     }
 
@@ -15,6 +16,7 @@ public class Bubblesort {
     public static void bubblesort(int[]vetor){
         int n = tamanho(vetor);
         int temp = 0;
+        int iteracao =0;
         for(int i = 0; i < n; i++){
             for(int j = 1; j < (n-i); j++){
                 if(vetor[j-1]> vetor[j]){
@@ -22,16 +24,20 @@ public class Bubblesort {
                     vetor[j-1] = vetor[j];
                     vetor[j]   = temp;
                 }
+                iteracao++;
+                printar(vetor, iteracao);
             }
         }
     }
 
-    public static void printar(int[]vetor){
+    public static void printar(int[]vetor, int iteracao){
         for (int i = 0; i < tamanho(vetor); i++) {
             int info = vetor[i];
             System.out.print(info + " -> ");
         }
         System.out.println();
+        System.out.println("Iteração: " + iteracao);
     }
+
 
 }

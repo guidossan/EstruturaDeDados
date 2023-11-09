@@ -12,7 +12,6 @@ public class Mergesort {
             return;
         }
         int mid = n / 2;
-        //cria e desloca os elementos para os outros array para ordenacao
         int[] l = new int[mid];
         int[] r = new int[n - mid];
         for (int i = 0; i < mid; i++) {
@@ -46,12 +45,13 @@ public class Mergesort {
     public static void fazMerge(int[]a){
         mergeSort(a,tamanho(a));
     }
-    public static void printar(int[]a){
-        for (int i = 0; i < tamanho(a); i++) {
-            int info = a[i];
+    public static void printar(int[]vetor, int iteracao){
+        for (int i = 0; i < tamanho(vetor); i++) {
+            int info = vetor[i];
             System.out.print(info + " -> ");
         }
         System.out.println();
+        System.out.println("Iteração: " + iteracao);
     }
 
 }

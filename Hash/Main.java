@@ -6,15 +6,15 @@ public class Main {
     public static void main(String [] args){
 
 //        insereTabelaResto(100,200);
-        insereTabelaResto(100,20000);
+//        insereTabelaResto(100,20000);
 //        insereTabelaResto(1000,1000000);
 //        insereTabelaResto(10000,11000000);
-//        insereTabelaResto(100000,500000000);
+        insereTabelaResto(100000,500000000);
 //        insereTabelaMult(100,200);
-        insereTabelaMult(100,20000);
+//        insereTabelaMult(100,20000);
 //        insereTabelaMult(1000,1000000);
 //        insereTabelaMult(10000,11000000);
-//        insereTabelaMult(100000,500000000);
+        insereTabelaMult(100000,500000000);
 //        tabelaHash tabela = new tabelaHash(10);
 //        tabela.insereHash(4459001);
 //        tabela.insereHash(4132002);

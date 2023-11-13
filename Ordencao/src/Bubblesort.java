@@ -24,9 +24,9 @@ public class Bubblesort {
                     vetor[j-1] = vetor[j];
                     vetor[j]   = temp;
                 }
-                iteracao++;
-                printar(vetor, iteracao);
             }
+            iteracao++;
+            printar(vetor, iteracao);
         }
     }
 

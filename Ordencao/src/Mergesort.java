@@ -49,13 +49,13 @@ public class Mergesort {
     public static void fazMerge(int[]a){
         mergeSort(a,tamanho(a));
     }
-    public static void printar(int[]vetor, int iteracao){
+    public static void printar(int[]vetor){
         for (int i = 0; i < tamanho(vetor); i++) {
             int info = vetor[i];
             System.out.print(info + " -> ");
         }
         System.out.println();
-        System.out.println("Iteração: " + iteracao);
+
     }
 
 }

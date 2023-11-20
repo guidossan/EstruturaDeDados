@@ -12,20 +12,17 @@ public class Shellsort {
     public static void shellsort(int[]vetor){
         int n = tamanho(vetor);
         int temp = 0;
-        int mid = tamanho(vetor)/2;
         int iteracao =0;
-        for(int i = mid; i > 0; i /=2){
-            for(int j = i; j <= n; j++){
-                temp       = vetor[j];
-                //travei aqui
-                for(int k = 0; k <= j; k++)
-                    if(vetor[k] > temp){
-                        vetor[k] = vetor[j];
-                        vetor[j]   = vetor[k];
-                }
+        for(int mid = n/2; mid > 0; mid /=2){
+            for(int i = mid; i < n; i++){
+                temp       = vetor[i];
+                int j;
+                for ( j = i; j >= mid && vetor[j- mid] > temp; j = j- mid)
+                    vetor[j] = vetor[j - mid];
+                vetor[j] = temp;
+                iteracao++;
+                printar(vetor, iteracao);
             }
-            iteracao++;
-            printar(vetor, iteracao);
         }
     }
 

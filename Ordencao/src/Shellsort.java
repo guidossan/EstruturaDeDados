@@ -16,14 +16,27 @@ public class Shellsort {
         for(int mid = n/2; mid > 0; mid /=2){
             for(int i = mid; i < n; i++){
                 temp       = vetor[i];
-                int j;
-                for ( j = i; j >= mid && vetor[j- mid] > temp; j = j- mid)
-                    vetor[j] = vetor[j - mid];
-                vetor[j] = temp;
+                int j = i;
+                while(j >=mid) {// comp
+                    if (vetor[j - mid] > temp) {
+                        int troc = vetor[j];
+                        vetor[j] = vetor[j - mid];
+                        vetor[j - mid] = troc;
+                    }
+                    //j = j-mid "zera" j para a proxima iteracao do i e assim realizar a comparacao
+                    // na proxima iteracao de i o j vai reaceber i sem fazer  j+=i oque nao seria bom
+                    j = j - mid;
+                }
                 iteracao++;
                 printar(vetor, iteracao);
             }
         }
+    }
+    public static void swap(int []vetor, int a, int b){
+        int temp;
+        temp       = vetor[a];
+        vetor[a] = vetor[b];
+        vetor[b]   = temp;
     }
 
     public static void printar(int[]vetor, int iteracao){

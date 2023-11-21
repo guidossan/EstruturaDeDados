@@ -17,7 +17,8 @@ public class Shellsort {
             for(int i = mid; i < n; i++){
                 temp       = vetor[i];
                 int j = i;
-                while(j >=mid) {// comp
+                while(j >=mid) {// evita outsofbounds e faz andar conforme mid
+                    //pois j = j - mid; ia decrementar para alem do vetor e nao pode
                     if (vetor[j - mid] > temp) {
                         int troc = vetor[j];
                         vetor[j] = vetor[j - mid];

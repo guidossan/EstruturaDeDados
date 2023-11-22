@@ -1,11 +1,12 @@
 package Hash;
-public class tabelaHashResto {
+
+public class tabelaHashDobra {
     int tamanho = 0;
     int posicaoHash;
     Node[] tabela;
     Node contador;
 
-    public tabelaHashResto(int tamanho) {
+    public tabelaHashDobra(int tamanho) {
         setTamanho(tamanho);
         this.tabela = new Node[tamanho];
 
@@ -25,13 +26,18 @@ public class tabelaHashResto {
 
     }
     public int getTamanho(){
-        return tamanho;
+            return tamanho;
     }
+
     public void setTamanho(int tamanho) {
         this.tamanho = tamanho;
     }
-    public void insereHashResto(int registro){
-        posicaoHash = registro % tamanho;
+
+    public void insereHash(int registro){
+        int Part1 = (registro / getTamanho())%getTamanho();
+        int Part2 = registro % getTamanho();
+        int juncao = Part1 + Part2;
+        int posicaoHash = juncao % getTamanho();
         Node no = new Node(registro);
         Node noAtual = tabela[posicaoHash];
         if (noAtual == null) {
@@ -46,7 +52,10 @@ public class tabelaHashResto {
 
 
     public void buscar(int registro){
-        posicaoHash = registro % tamanho;
+        float A = 0.6180339887f;
+        float var = registro * A;
+        var = var - (int)var;
+        posicaoHash = (int) (tamanho * var);
         Node noBuscado = tabela[posicaoHash];
         long startTime = System.nanoTime();
         if (noBuscado != null) {
@@ -72,4 +81,6 @@ public class tabelaHashResto {
             System.out.println("null"); // Marca o final da lista na posição
         }
     }
+
+
 }

@@ -7,7 +7,7 @@ public class tabelaHashMult {
     Node contador;
 
     public tabelaHashMult(int tamanho) {
-        this.tamanho = tamanho;
+        setTamanho(tamanho);
         this.tabela = new Node[tamanho];
 
         for (int i = 0; i < tamanho; i++) {
@@ -23,10 +23,12 @@ public class tabelaHashMult {
         contador = new Node(p);
         return contador;
 
-
     }
     public int getTamanho(){
         return tamanho;
+    }
+    public void setTamanho(int tamanho) {
+        this.tamanho = tamanho;
     }
     public void insereHash(int registro){
         float A = 0.3F;
